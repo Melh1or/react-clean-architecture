@@ -1,4 +1,4 @@
-import {Ingredient} from './ingredient'
+import {Ingredient} from 'domain/ingredient'
 
 export type ProductTitle = string
 

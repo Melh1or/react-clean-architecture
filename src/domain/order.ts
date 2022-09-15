@@ -1,5 +1,5 @@
-import {Product, totalPrice} from './product'
-import {User} from './user'
+import {Product, totalPrice} from 'domain/product'
+import {User} from 'domain/user'
 
 export type OrderStatus = 'new' | 'delivery' | 'completed'
 
