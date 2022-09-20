@@ -1,12 +1,13 @@
 import React from 'react'
-import {Cart} from 'domain/cart'
+
 import {totalPrice} from 'domain/product'
+import {useCartStorage} from 'services/storageAdapter'
 
 import {Cookie} from 'ui/cookie'
-import styles from './cart.module.css'
+import styles from './cart.module.scss'
 
 export function Cart() {
-  const cart: Cart = {}
+  const {cart} = useCartStorage()
 
   return (
     <section>

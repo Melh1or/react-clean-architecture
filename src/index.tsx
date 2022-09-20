@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import {BrowserRouter} from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
 import {App} from './App'
+import {Provider} from 'services/store'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -10,9 +11,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
 )
 

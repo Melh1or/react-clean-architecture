@@ -1,9 +1,10 @@
 import {Product} from 'domain/product'
 import {Cookie} from 'ui/cookie'
+import {useStore} from 'services/store'
 import styles from './front.module.scss'
 
 export function Front() {
-  const {cookies} = {}
+  const {cookies} = useStore()
 
   return (
     <main>

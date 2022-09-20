@@ -12,3 +12,11 @@ export type Product = {
 export function totalPrice(products: Product[]): PriceCents {
   return products.reduce((total, {price}) => total += price, 0)
 }
+
+export const ingredients: Record<Ingredient, string> = {
+  chocolate: 'Chocolate',
+  cocoa: 'Cocoa Powder',
+  cherry: 'Cherry',
+  marshmallow: 'Marshmallow',
+  peanuts: 'Peanut Butter',
+}

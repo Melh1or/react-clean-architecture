@@ -1,5 +1,6 @@
 import React from 'react'
 import {ingredients} from 'domain/product'
+import {useUserStorage} from 'services/storageAdapter'
 
 export function Profile() {
   const {user} = useUserStorage()

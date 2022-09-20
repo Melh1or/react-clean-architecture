@@ -1,5 +1,8 @@
+import {useOrdersStorage} from 'services/storageAdapter'
+
 export function Orders() {
-  const {orders} = {}
+  const {orders} = useOrdersStorage()
+
   if (!orders.length) return null
 
   return (

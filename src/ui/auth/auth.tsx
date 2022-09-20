@@ -1,18 +1,24 @@
-import React, {useState} from 'react'
+import React from 'react'
+import {Navigate} from 'react-router-dom'
+
+import {useAuthenticate} from 'application/authenticate'
 
 import {UserName} from 'domain/user'
-import styles from './Auth.module.css'
+import styles from './auth.module.scss'
 
 export function Auth() {
-  const [name, setName] = useState<UserName>('')
-  const [email, setEmail] = useState<Email>('')
-  const [loading, setLoading] = useState(false)
+  const [name, setName] = React.useState<UserName>('')
+  const [email, setEmail] = React.useState<Email>('')
+  const [loading, setLoading] = React.useState(false)
+
+  const {user, authenticate} = useAuthenticate()
+  if (!!user) return <Navigate to='/' />
 
   async function handleSubmit(e: React.FormEvent) {
     setLoading(true)
     e.preventDefault()
 
-    // todo: add request
+    await authenticate(name, email)
     setLoading(false)
   }
 

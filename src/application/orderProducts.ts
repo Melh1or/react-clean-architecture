@@ -1,19 +1,31 @@
 import {User} from 'domain/user'
 import {Cart} from 'domain/cart'
 import {createOrder} from 'domain/order'
-import {NotificationService, OrdersStorageService, PaymentService} from 'application/ports'
 
-const payment: PaymentService = {}
-const notifier: NotificationService = {}
-const orderStorage: OrdersStorageService = {}
+import {usePayment} from 'services/paymentAdpater'
+import {useNotifier} from 'services/notificationAdapter'
+import {useCartStorage, useOrdersStorage} from 'services/storageAdapter'
 
-async function orderProducts(user: User, cart: Cart) {
-  const order = createOrder(user, cart.products)
+export function useOrderProducts() {
+  const payment = usePayment()
+  const notifier = useNotifier()
+  const orderStorage = useOrdersStorage()
+  const cartStorage = useCartStorage()
 
-  const paid = await payment.tryPay(order.total)
+  async function orderProducts(user: User, cart: Cart) {
+    const order = createOrder(user, cart.products)
 
-  if (!paid) return notifier.notify('Payment failed')
+    const paid = await payment.tryPay(order.total)
 
-  const {orders} = orderStorage
-  orderStorage.updateOrders([...orders, order])
+    if (!paid) return notifier.notify('Payment failed')
+
+    const {orders} = orderStorage
+    orderStorage.updateOrders([...orders, order])
+    cartStorage.emptyCart()
+  }
+
+  return {
+    orderProducts,
+  }
 }
+
